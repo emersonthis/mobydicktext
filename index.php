@@ -11,13 +11,7 @@ $c = new \Slim\Container($configuration);
 $app = new Slim\App($c);
 
 $app->get('/', function ($request, $response, $args) {
-	return $response->write("
-     “Oh, the rare old Whale, mid storm and gale
-     In his ocean home will be
-     A giant in might, where might is right,
-     And King of the boundless sea.”
-      —Whale Song.
-	");
+	return $response->write(file_get_contents('./index.html'));
 });
 
 $app->get('/c/{n}', function ($request, $response, $args) {
