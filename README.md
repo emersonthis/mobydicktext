@@ -11,6 +11,6 @@
 
 ### Run local server
 
-`php -S localhost:8080 -t ./ index.php`
+`php -S localhost:8080 -t ./`
 
 (Point browser to localhost:8080)

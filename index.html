@@ -4,6 +4,9 @@
 	<title>Placeholder Text from Moby Dick</title>
 
 	<style>
+	body,html {
+		height: 100%;
+	}
 	body {
 		line-height: 1.5;
 		margin: 0;
@@ -40,30 +43,43 @@
 	.link {
 		font-style: normal;
 		font-family: courier, monospaced;
-		display: block;
+// 		display: block;
 	}
+
+	.ui {
+		background-color: #FFF;
+		text-align: center;
+		padding: 1em 0;
+	}
+	/*.ui form input {
+		line-height: 2;
+	}*/
 	</style>
 </head>
 <body>
 
-<div class="quote">
-Oh, the rare old Whale, mid storm and gale<br>
-In his ocean home will be<br>
-A giant in might, where might is right,<br>
-And King of the boundless sea.<br>
-&mdash;Whale Song.
+	<div class="ui">
+		<form onsubmit="return formsubmit(this);">
+			<input id="n" type="number" value="150" />
+			<select id="unit">
+				<option value="w">words</option>
+				<option value="c">characters</option>
+			</select>
+			<input type="submit" value="GO" />
+		</form>
 
-<div class="buttons">
-<a href="/c/50">50 Characters</a>
-<a href="/c/150">150 Characters</a>
-<a href="/c/250">250 Characters</a>
-<a href="/c/500">500 Characters</a>
-</div>
+		<p>Or just point your browser to <a class="link" href="/c/150">/c/150</a> or <a class="link" href="/w/150">/w/150</a></p>
+	</div>
 
-<p>Or just point your browser to <span class="link">http://mobydicktext.com/c/X</span> where X is any character count </p>
-
-</div>
-
+<script>
+function formsubmit(form) {
+	var unit = document.getElementById('unit').value;
+	var n = document.getElementById('n').value;
+	var newLoc = "/" + unit + "/" + n;
+	window.location.href = newLoc;
+	return false;
+}
+</script>
 
 </body>
 </html>
