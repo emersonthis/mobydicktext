@@ -20,11 +20,15 @@ $app->get('/c/{n}', function ($request, $response, $args) {
 
 	include './characters.php';
 
-    $min = strlen(array_values($characters)[0]);
-    $max = strlen(end($characters));
+    $min = strlen(array_values($characters)[0][0]);
+    $max = strlen(end($characters)[0]);
     reset($characters);
 
-    $matches = (!empty($characters[$args['c']])) ? $characters[$args['c']] : [];
+    // @TODO validate size
+    // var_dump($min);
+    // var_dump($max);
+
+    $matches = (!empty($characters[$args['n']])) ? $characters[$args['n']] : [];
 
     return (!empty($matches)) ? $response->write( $matches[array_rand($matches)] ) : '';
 });
@@ -33,13 +37,18 @@ $app->get('/c/{n}', function ($request, $response, $args) {
 $app->get('/w/{n}', function ($request, $response, $args) {
 
 	include './words.php';
-				# start with a capital       # non-whitespace then whitespace
-	$pattern = '/[A-Z](\S+[\s\.]){' 		. intval($args['n']) . '}/';
-	preg_match_all($pattern, $mobydick1_8, $matches);
 
-	$i = ( !empty($matches) && !empty($matches[0]) ) ? mt_rand( 0, count($matches[0])-1 )  : 0;
+    $min = strlen(array_values($words)[0][0]);
+    $max = strlen(end($words)[0]);
+    reset($words);
 
-    return $response->write($matches[0][$i]);
+    // @TODO validate size
+    // var_dump($min);
+    // var_dump($max);
+
+    $matches = (!empty($words[$args['n']])) ? $words[$args['n']] : [];
+
+    return (!empty($matches)) ? $response->write( $matches[array_rand($matches)] ) : '';
 });
 
 $app->run();

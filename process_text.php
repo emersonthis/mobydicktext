@@ -41,5 +41,5 @@ ksort($words);
 
 // var_dump($words);
 
-file_put_contents('characters.php', '<?php $characters = ' . var_export($characters, true));
-file_put_contents('words.php', '<?php $words = ' . var_export($words, true));
+file_put_contents('characters.php', '<?php $characters = ' . var_export($characters, true) . ';');
+file_put_contents('words.php', '<?php $words = ' . var_export($words, true) . ';');
