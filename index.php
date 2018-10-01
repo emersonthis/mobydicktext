@@ -18,26 +18,21 @@ $app->get('/', function ($request, $response, $args) {
 # Character count endpoint
 $app->get('/c/{n}', function ($request, $response, $args) {
 
-	include './mobydick1-8.php';
-				# start with a capital letter.   # set length of following chars
-	$pattern = '/[A-Z].{' 		. ( intval($args['n']) -2 ) . '}\./';
-	preg_match_all($pattern, $mobydick1_8, $matches);
+	include './characters.php';
 
-	# if no matches with period at the end, try without
-	if ( empty($matches[0]) ) {
-		$pattern2 = '/[A-Z].{' 		. ( intval($args['n']) -1 ) . '}/';
-		preg_match_all($pattern2, $mobydick1_8, $matches);
-	}
+    $min = strlen(array_values($characters)[0]);
+    $max = strlen(end($characters));
+    reset($characters);
 
-	$i = ( !empty($matches) && !empty($matches[0]) ) ? mt_rand( 0, count($matches[0])-1 )  : 0;
+    $matches = (!empty($characters[$args['c']])) ? $characters[$args['c']] : [];
 
-    return $response->write($matches[0][$i]);
+    return (!empty($matches)) ? $response->write( $matches[array_rand($matches)] ) : '';
 });
 
 # Word count endpoint
 $app->get('/w/{n}', function ($request, $response, $args) {
 
-	include './mobydick1-8.php';
+	include './words.php';
 				# start with a capital       # non-whitespace then whitespace
 	$pattern = '/[A-Z](\S+[\s\.]){' 		. intval($args['n']) . '}/';
 	preg_match_all($pattern, $mobydick1_8, $matches);
