@@ -12,7 +12,7 @@ $words = [];
 foreach( $matches[0] as $match ) {
 
     // add to characters
-    $length = strlen($match);
+    $length = mb_strlen($match);
 
     if (isset($words[$length])) {
         $characters[$length][] = $match;
