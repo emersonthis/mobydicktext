@@ -21,10 +21,8 @@ foreach( $matches[0] as $match ) {
         $characters[$length][] = $match;
     }
 
-
     // add to words
-
-    $wordCount = str_word_count($match);
+    $wordCount = str_word_count($match, 0, "’");
 
     if (isset($words[$wordCount])) {
         $words[$wordCount][] = $match;
