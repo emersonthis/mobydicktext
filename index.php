@@ -15,8 +15,7 @@ $app->get('/', function ($request, $response, $args) {
 	return $response->write(file_get_contents('./index.html'));
 });
 
-function compositeStrings($array, $n) {
-
+function makeHalvesSizes($n) {
     $halfALength;
     $halfBLength;
 
@@ -28,8 +27,24 @@ function compositeStrings($array, $n) {
         $halfBLength = floor($n/2);
     }
 
-    $halfA = getString($array, $halfALength);
-    $halfB = getString($array, $halfBLength);
+    return [$halfALength, $halfBLength];
+
+}
+
+function compositeStrings($array, $n) {
+
+    $halfs = makeHalvesSizes($n);
+    $halfA = getString($array, $halfs[0]);
+    $halfB = getString($array, $halfs[1]);
+
+    return "{$halfA} {$halfB}";
+}
+
+function compositeSentences($array, $n) {
+
+    $halfs = makeHalvesSizes($n);
+    $halfA = getSentence($array, $halfs[0]);
+    $halfB = getSentence($array, $halfs[1]);
 
     return "{$halfA} {$halfB}";
 }
@@ -45,14 +60,23 @@ function getString($array, $n) {
     }
 }
 
+//@TODO This should either by different or DRYed with getString
+function getSentence($array, $n) {
+
+    $n = intval($n);
+
+    if (isset($array[$n])) {
+        return $array[$n][array_rand($array[$n])];
+    } else {
+        return compositeSentences($array, $n);
+    }
+}
+
+
 # Character count endpoint
 $app->get('/c/{n}', function ($request, $response, $args) {
 
 	include './characters.php';
-
-    // $min = strlen(array_values($characters)[0][0]);
-    // $max = strlen(end($characters)[0]);
-    // reset($characters);
 
     if ($args['n'] > 1000 || $args['n'] < 2) {
         die("Character parameter must be between 2 and 10000");
@@ -66,17 +90,13 @@ $app->get('/w/{n}', function ($request, $response, $args) {
 
 	include './words.php';
 
-    // $min = strlen(array_values($words)[0][0]);
-    // $max = strlen(end($words)[0]);
-    // reset($words);
-
     if ($args['n'] > 1000 || $args['n'] < 1) {
         die("Word parameter must be between 1 and 1000");
     }
 
     $matches = (!empty($words[$args['n']])) ? $words[$args['n']] : [];
 
-    return (!empty($matches)) ? $response->write( $matches[array_rand($matches)] ) : '';
+    return $response->write( getSentence($words, $args['n']) );
 });
 
 $app->run();
