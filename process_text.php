@@ -22,7 +22,7 @@ foreach( $matches[0] as $match ) {
     }
 
     // add to words
-    $wordCount = str_word_count($match, 0, '’');
+    $wordCount = str_word_count($match, 0, '’-');
 
     if (isset($words[$wordCount])) {
         $words[$wordCount][] = $match;
