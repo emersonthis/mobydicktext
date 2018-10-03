@@ -9,11 +9,6 @@ preg_match_all('/[A-Z][^\.!\?]*[\.!\?]/', $mobydick, $matches);
 $characters = [];
 $words = [];
 
-// function str_word_count_utf8($str) {
-//     $a = preg_split('/\W+/u', $str, -1, PREG_SPLIT_NO_EMPTY);
-//     return count($a);
-// }
-
 foreach( $matches[0] as $match ) {
 
     // add to characters
@@ -41,8 +36,6 @@ foreach( $matches[0] as $match ) {
 
 ksort($characters);
 ksort($words);
-
-// var_dump($words);
 
 file_put_contents('characters.php', '<?php $characters = ' . var_export($characters, true) . ';');
 file_put_contents('words.php', '<?php $words = ' . var_export($words, true) . ';');

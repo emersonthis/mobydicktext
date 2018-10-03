@@ -50,16 +50,13 @@ $app->get('/c/{n}', function ($request, $response, $args) {
 
 	include './characters.php';
 
-    $min = strlen(array_values($characters)[0][0]);
-    $max = strlen(end($characters)[0]);
-    reset($characters);
+    // $min = strlen(array_values($characters)[0][0]);
+    // $max = strlen(end($characters)[0]);
+    // reset($characters);
 
-    // @TODO validate size
-    // var_dump($min);
-    // var_dump($max);
-
-    // $matches = (!empty($characters[$args['n']])) ? $characters[$args['n']] : compositeStrings($characters, $args['n']);
-    // return (!empty($matches)) ? $response->write( $matches[array_rand($matches)] ) : '';
+    if ($args['n'] > 1000 || $args['n'] < 2) {
+        die("Character parameter must be between 2 and 10000");
+    }
 
     return $response->write( getString($characters, $args['n']) );
 });
@@ -69,13 +66,13 @@ $app->get('/w/{n}', function ($request, $response, $args) {
 
 	include './words.php';
 
-    $min = strlen(array_values($words)[0][0]);
-    $max = strlen(end($words)[0]);
-    reset($words);
+    // $min = strlen(array_values($words)[0][0]);
+    // $max = strlen(end($words)[0]);
+    // reset($words);
 
-    // @TODO validate size
-    // var_dump($min);
-    // var_dump($max);
+    if ($args['n'] > 1000 || $args['n'] < 1) {
+        die("Word parameter must be between 1 and 1000");
+    }
 
     $matches = (!empty($words[$args['n']])) ? $words[$args['n']] : [];
 
