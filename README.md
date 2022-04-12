@@ -3,6 +3,7 @@
 http://mobydicktext.com
 
 ## Usage
+
 [coming soon]
 
 ## Development
@@ -17,8 +18,14 @@ http://mobydicktext.com
 
 (Point browser to localhost:8080)
 
+### Deploy
+
+Hosted on Heroku free dyno (which sleeps and takes 30s to wake up)
+
+`git push origin master` will automatically deploy to Heroku
 
 ### TODO
+
 [ ] Nicer error reseponses
 [ ] Test code?
 [ ] Check accuracy of word endoing
