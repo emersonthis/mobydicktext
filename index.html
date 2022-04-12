@@ -1,85 +1,87 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Placeholder Text from Moby Dick</title>
+  <head>
+    <title>Placeholder Text from Moby Dick</title>
 
-	<style>
-	body,html {
-		height: 100%;
-	}
-	body {
-		line-height: 1.5;
-		margin: 0;
-		padding:0;
-		background-image: url('./img/home/shore.jpg');
-		background-size: cover;
-	}
-	.quote {
-		max-width: 25em;
-		margin: 0 auto;
-		padding: 2em;
-		font-size: 21px;
-		font-style: italic;
-		background-color: rgba(255,255,255,.85);
-	}
-	.buttons {
-		margin-top: 2em;
-		display: flex;
-		justify-content: space-between;
-		flex-wrap: wrap;
+    <style>
+      body,
+      html {
+        height: 100%;
+      }
+      body {
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+        background-image: url("./img/home/shore.jpg");
+        background-size: cover;
+      }
+      .quote {
+        max-width: 25em;
+        margin: 0 auto;
+        padding: 2em;
+        font-size: 21px;
+        font-style: italic;
+        background-color: rgba(255, 255, 255, 0.85);
+      }
+      .buttons {
+        margin-top: 2em;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .buttons a {
+        background-color: #000;
+        // 		display: inline-block;
+        color: #fff;
+        padding: 0.5em 1em;
+        flex-basis: 45%;
+        box-sizing: border-box;
+        margin-bottom: 1em;
+        text-align: center;
+      }
+      .link {
+        font-style: normal;
+        font-family: courier, monospaced;
+        // 		display: block;
+      }
 
-	}
-	.buttons a {
-		background-color: #000;
-// 		display: inline-block;
-		color: #FFF;
-		padding: .5em 1em;
-		flex-basis: 45%;
-		box-sizing: border-box;
-		margin-bottom: 1em;
-		text-align: center;
+      .ui {
+        background-color: #fff;
+        text-align: center;
+        padding: 1em 0;
+      }
+      .ui form input[type="submit"] {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ui">
+      <form onsubmit="return formsubmit(this);">
+        <input id="n" type="number" value="150" />
+        <select id="unit">
+          <option value="w">words</option>
+          <option value="c">characters</option>
+        </select>
+        <input type="submit" value="GO" />
+      </form>
 
-	}
-	.link {
-		font-style: normal;
-		font-family: courier, monospaced;
-// 		display: block;
-	}
+      <p>
+        Or just point your browser to
+        <a class="link" href="/c/150">/c/150</a> or
+        <a class="link" href="/w/150">/w/150</a>
+      </p>
+    </div>
 
-	.ui {
-		background-color: #FFF;
-		text-align: center;
-		padding: 1em 0;
-	}
-	/*.ui form input {
-		line-height: 2;
-	}*/
-	</style>
-</head>
-<body>
-
-	<div class="ui">
-		<form onsubmit="return formsubmit(this);">
-			<input id="n" type="number" value="150" />
-			<select id="unit">
-				<option value="w">words</option>
-				<option value="c">characters</option>
-			</select>
-			<input type="submit" value="GO" />
-		</form>
-
-		<p>Or just point your browser to <a class="link" href="/c/150">/c/150</a> or <a class="link" href="/w/150">/w/150</a></p>
-	</div>
-
-<script>
-function formsubmit(form) {
-	var unit = document.getElementById('unit').value;
-	var n = document.getElementById('n').value;
-	var newLoc = "/" + unit + "/" + n;
-	window.location.href = newLoc;
-	return false;
-}
-</script>
-
-</body>
+    <script>
+      function formsubmit(form) {
+        var unit = document.getElementById("unit").value;
+        var n = document.getElementById("n").value;
+        var newLoc = "/" + unit + "/" + n;
+        window.location.href = newLoc;
+        return false;
+      }
+    </script>
+  </body>
 </html>
